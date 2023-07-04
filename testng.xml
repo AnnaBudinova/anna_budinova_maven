@@ -1,0 +1,7 @@
+<suite name="Web test suite" verbose="1">
+    <test name="Smoke Tests">
+        <classes>
+            <class name="homework.TestClass"></class>
+        </classes>
+    </test>
+</suite>
