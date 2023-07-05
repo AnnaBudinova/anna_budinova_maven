@@ -10,7 +10,10 @@ public class TestClass {
     public Object[] generateNumbersSum() {
         Object[][] objects = {
                 {2, 3, 5},
-                {5, 8, 3},
+                {-1, -1, -2},
+                {0, -1, -1},
+                {-1, 3, 2},
+                {0, 4, 4},
         };
         return objects;
     }
@@ -25,7 +28,9 @@ public class TestClass {
     public Object[] generateNumbersDeduction() {
         Object[][] objects = {
                 {5, 3, 2},
-                {8, 8, 3},
+                {-2, -2, 0},
+                {-1, 0, -1},
+                {-5, -1, -4},
         };
         return objects;
     }
@@ -40,7 +45,10 @@ public class TestClass {
     public Object[] generateNumbersMultiplication() {
         Object[][] objects = {
                 {1, 1, 1},
-                {8, 8, 3},
+                {0, 1, 0},
+                {4, 4, 16},
+                {-1, -2, 2},
+                {-1, 8, -8},
         };
         return objects;
     }
@@ -54,31 +62,60 @@ public class TestClass {
     @DataProvider(name = "generateNumbersQuotient")
     public Object[] generateNumbersQuotient() {
         Object[][] objects = {
-                {4, 4, 1},
-                {8, 8, 3},
+                {1, 1, 1},
+                {2, 1, 2},
+                {0, 1, 0},
+                {1, 0, 1},
+                {-1, -1, 1},
+                {10, 1, 10},
+                {2, -1, -2},
         };
         return objects;
     }
 
     @Test(dataProvider = "generateNumbersQuotient", groups = "testQuotient")
     public void testQuotient(int a, int b, int expectedResult) {
-        int actualResult = a / b;
-        Assert.assertEquals(actualResult, expectedResult);
+            try {
+                int actualResult = a / b;
+                Assert.assertEquals(actualResult, expectedResult);
+            } catch (ArithmeticException e) {
+                Assert.assertEquals(e.getMessage(), "/ by zero");
+                if (b != 0) {
+                    throw e;
+                }
+            }
     }
 
     @DataProvider(name = "generateNumbersCoefficient")
     public Object[] generateNumbersCoefficient() {
         Object[][] objects = {
                 {4, 2, 0},
-                {8, 8, 1},
+                {1, 1, 0},
+                {2, 1, 0},
+                {0, 1, 0},
+                {1, 0, 1},
+                {-1, -1, 0},
+                {10, 1, 0},
+                {2, -1, 0},
+                {2, -1, 0},
+                {6, 2, 0},
+                {7, 2, 1},
+                {11, 2, 1},
         };
         return objects;
     }
 
         @Test(dataProvider = "generateNumbersCoefficient", groups = "testCoefficient")
         public void testCoefficient ( int a, int b, int expectedResult){
-            int actualResult = a % b;
-            Assert.assertEquals(actualResult, expectedResult);
+            try {
+                int actualResult = a % b;
+                Assert.assertEquals(actualResult, expectedResult);
+            } catch (ArithmeticException e) {
+                Assert.assertEquals(e.getMessage(), "/ by zero");
+                if (b != 0) {
+                    throw e;
+                }
+            }
         }
     }
 
