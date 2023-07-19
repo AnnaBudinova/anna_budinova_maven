@@ -87,7 +87,6 @@ public class Homework {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         wait.until(ExpectedConditions.urlToBe("http://the-internet.herokuapp.com/context_menu"));
     }
-
     @Test
     public void testWindows() {
         driver.get("http://the-internet.herokuapp.com/windows");
