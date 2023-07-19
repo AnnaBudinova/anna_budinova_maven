@@ -16,6 +16,8 @@ import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.Test;
 
 import java.time.Duration;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Homework {
     private WebDriver driver;
@@ -84,5 +86,33 @@ public class Homework {
         driver.switchTo().alert().accept();
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         wait.until(ExpectedConditions.urlToBe("http://the-internet.herokuapp.com/context_menu"));
+    }
+
+    @Test
+    public void testWindows() {
+        driver.get("http://the-internet.herokuapp.com/windows");
+        WebElement button = driver.findElement(By.xpath("//*[@href=\"/windows/new\"]"));
+        button.click();
+
+        String currentUrl = driver.getCurrentUrl();
+        Assert.assertEquals(currentUrl, "http://the-internet.herokuapp.com/windows");
+
+        List<String> windows = new ArrayList<>(driver.getWindowHandles());
+        String secondWindow = windows.get(1);
+        driver.switchTo().window(secondWindow);
+        driver.manage().window().maximize();
+        currentUrl = driver.getCurrentUrl();
+        Assert.assertEquals(currentUrl, "http://the-internet.herokuapp.com/windows/new");
+
+        WebElement headline = driver.findElement(By.xpath("//*[@class=\"example\"]"));
+        String actualHeadlineText = headline.getText();
+        Assert.assertEquals(actualHeadlineText, "New Window");
+
+        String firstWindow = windows.get(0);
+
+        driver.switchTo().window(firstWindow);
+        currentUrl = driver.getCurrentUrl();
+        Assert.assertEquals(currentUrl, "http://the-internet.herokuapp.com/windows");
+
     }
 }
