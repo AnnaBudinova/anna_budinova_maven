@@ -1,4 +1,4 @@
-package lesson16.object;
+package lesson17;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -15,6 +15,12 @@ public class Header {
         this.driver = driver;
     }
 
+    public void clickNewPost() {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        WebElement postLink = wait.until(ExpectedConditions.elementToBeClickable(By.id("nav-link-new-post")));
+        postLink.click();
+    }
+
     public void clickProfile() {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         WebElement profileLink = wait.until(ExpectedConditions.elementToBeClickable(By.id("nav-link-profile")));
@@ -24,23 +30,5 @@ public class Header {
     public void clickLogin() {
         WebElement loginLink = driver.findElement(By.id("nav-link-login"));
         loginLink.click();
-    }
-
-    public void clickLogOut() {
-        WebElement logoutLink = driver.findElement(By.xpath("//*[@class='fas fa-sign-out-alt fa-lg']"));
-        logoutLink.click();
-    }
-    public void clickSmallLogOut() {
-        WebElement clickSmallLogOut = driver.findElement(By.xpath("//*[@class='navbar-toggler']"));
-        clickSmallLogOut.click();
-    }
-    public void clickSmallLogOutIcon() {
-        WebElement clickSmallLogOutIcon = driver.findElement(By.id("nav-link-logout"));
-        clickSmallLogOutIcon.click();
-    }
-    public void newPostLink() {
-        WebDriverWait postLinkWait = new WebDriverWait(driver, Duration.ofSeconds(30));
-        WebElement newPostLink = driver.findElement(By.id("nav-link-new-post"));
-        newPostLink.click();
     }
 }
