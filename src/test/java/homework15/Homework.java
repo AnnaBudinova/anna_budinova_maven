@@ -111,6 +111,5 @@ public class Homework {
         driver.switchTo().window(firstWindow);
         currentUrl = driver.getCurrentUrl();
         Assert.assertEquals(currentUrl, "http://the-internet.herokuapp.com/windows");
-
     }
 }
