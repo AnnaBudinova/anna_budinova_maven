@@ -17,7 +17,7 @@ public class HomePage {
     }
 
     public boolean isUrlLoaded() {
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
         return wait.until(ExpectedConditions.urlToBe(HomePage.PAGE_URL));
     }
 

@@ -25,7 +25,14 @@ public class LoginPage {
         this.driver = driver;
         PageFactory.initElements(driver, this);
     }
-
+    public void login(String user, String password) {
+        populateUsername(user);
+        populatePassword(password);
+        clickSignIn();
+    }
+    public void navigateTo() {
+        this.driver.get(LoginPage.PAGE_URL);
+    }
     public void clickSignIn() {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         wait.until(ExpectedConditions.elementToBeClickable(signInButton));
