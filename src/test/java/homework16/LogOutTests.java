@@ -10,35 +10,12 @@ import org.testng.annotations.*;
 
 import java.time.Duration;
 
-public class LogOutTests {
-    private WebDriver driver;
-
-    @BeforeSuite
-    protected final void setupTestSuite() {
-        WebDriverManager.chromedriver().setup();
-        WebDriverManager.firefoxdriver().setup();
-        WebDriverManager.edgedriver().setup();
-    }
-
-    @BeforeMethod
-    protected final void setUpTest() {
-        this.driver = new EdgeDriver();
-        this.driver.manage().window().maximize();
-        driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(20));
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
-    }
-
-    @AfterMethod
-    protected final void tearDownTest() {
-        if (this.driver != null) {
-            this.driver.quit();
-        }
-    }
+public class LogOutTests extends TestObject {
 
     @DataProvider(name = "getUsers")
     public Object[][] getUsers() {
         return new Object[][]{
-                {"anbori@abv.bg", "_Passw0rd", "annabudinova"}, //login with username
+                {"anbori@abv.bg", "_Passw0rd", "annabudinova"},
         };
     }
 
@@ -51,21 +28,14 @@ public class LogOutTests {
 
     @Test(dataProvider = "getUsers")
     public void testLogOutFromProfile(String user, String password, String name) {
+        WebDriver driver = getDriver();
+        LoginPage loginPage = new LoginPage(driver);
+        loginPage.navigateTo();
+        loginPage.login(user, password);
         HomePage homePage = new HomePage(driver);
-        homePage.navigateTo();
+        Assert.assertTrue(homePage.isUrlLoaded(), "The Home URL is not correct!");
 
         Header header = new Header(driver);
-        header.clickLogin();
-
-        LoginPage loginPage = new LoginPage(driver);
-        Assert.assertTrue(loginPage.isUrlLoaded(), "The Login URL is not correct!");
-        String signInText = loginPage.getSignInElementText();
-        Assert.assertEquals(signInText, "Sign in");
-        loginPage.populateUsername(user);
-        loginPage.populatePassword(password);
-        loginPage.clickSignIn();
-
-        Assert.assertTrue(homePage.isUrlLoaded(), "The Home URL is not correct!");
         header.clickProfile();
 
         ProfilePage profilePage = new ProfilePage(driver);
@@ -74,26 +44,20 @@ public class LogOutTests {
         Assert.assertEquals(actualUserName, name, "The username is incorrect!");
         header.clickLogOut();
         Assert.assertTrue(loginPage.isUrlLoaded(), "The Login URL is not correct!");
+        String signInText = loginPage.getSignInElementText();;
         Assert.assertEquals(signInText, "Sign in");
     }
 
     @Test(dataProvider = "loginUser")
     public void testLogOutFromNewPost(String user, String password) {
-        HomePage homePage = new HomePage(driver);
-        homePage.navigateTo();
-
-        Header header = new Header(driver);
-        header.clickLogin();
-
+        WebDriver driver = getDriver();
         LoginPage loginPage = new LoginPage(driver);
-        Assert.assertTrue(loginPage.isUrlLoaded(), "The Login URL is not correct!");
-        String signInText = loginPage.getSignInElementText();
-        Assert.assertEquals(signInText, "Sign in");
-        loginPage.populateUsername(user);
-        loginPage.populatePassword(password);
-        loginPage.clickSignIn();
+        loginPage.navigateTo();
+        loginPage.login(user, password);
 
+        HomePage homePage = new HomePage(driver);
         Assert.assertTrue(homePage.isUrlLoaded(), "The Home URL is not correct!");
+        Header header = new Header(driver);
         header.newPostLink();
 
         NewPostPage newPostPage = new NewPostPage(driver);
@@ -102,54 +66,41 @@ public class LogOutTests {
         Assert.assertEquals(isTextDisplayed, "Post a picture to share with your awesome followers");
         header.clickLogOut();
         Assert.assertTrue(loginPage.isUrlLoaded(), "The Login URL is not correct!");
+        String signInText = loginPage.getSignInElementText();;
         Assert.assertEquals(signInText, "Sign in");
     }
 
     @Test(dataProvider = "loginUser")
     public void testLogOutFromHome(String user, String password) {
-        HomePage homePage = new HomePage(driver);
-        homePage.navigateTo();
-
-        Header header = new Header(driver);
-        header.clickLogin();
-
+        WebDriver driver = getDriver();
         LoginPage loginPage = new LoginPage(driver);
-        Assert.assertTrue(loginPage.isUrlLoaded(), "The Login URL is not correct!");
-        String signInText = loginPage.getSignInElementText();
-        Assert.assertEquals(signInText, "Sign in");
-        loginPage.populateUsername(user);
-        loginPage.populatePassword(password);
-        loginPage.clickSignIn();
-
+        loginPage.navigateTo();
+        loginPage.login(user, password);
+        HomePage homePage = new HomePage(driver);
         Assert.assertTrue(homePage.isUrlLoaded(), "The Home URL is not correct!");
-
+        Header header = new Header(driver);
         header.clickLogOut();
         Assert.assertTrue(loginPage.isUrlLoaded(), "The Login URL is not correct!");
-        Assert.assertEquals(signInText, "Sign in");
+        String signInText = loginPage.getSignInElementText();;
+        Assert.assertEquals(signInText, "Sign in");;
     }
 
     @Test(dataProvider = "getUsers")
     public void testLogOutSmallScreen(String user, String password, String name) {
+        WebDriver driver = getDriver();
+        LoginPage loginPage = new LoginPage(driver);
+        loginPage.navigateTo();
+        loginPage.login(user, password);
+
         HomePage homePage = new HomePage(driver);
-        homePage.navigateTo();
+        Assert.assertTrue(homePage.isUrlLoaded(), "The Home URL is not correct!");
+        this.getDriver().manage().window().setSize(new Dimension(400, 626));
 
         Header header = new Header(driver);
-        header.clickLogin();
-
-        LoginPage loginPage = new LoginPage(driver);
-        Assert.assertTrue(loginPage.isUrlLoaded(), "The Login URL is not correct!");
-        String signInText = loginPage.getSignInElementText();
-        Assert.assertEquals(signInText, "Sign in");
-        loginPage.populateUsername(user);
-        loginPage.populatePassword(password);
-        loginPage.clickSignIn();
-
-        Assert.assertTrue(homePage.isUrlLoaded(), "The Home URL is not correct!");
-        this.driver.manage().window().setSize(new Dimension(400, 626));
-
         header.clickSmallLogOut();
         header.clickSmallLogOutIcon();
         Assert.assertTrue(loginPage.isUrlLoaded(), "The Login URL is not correct!");
+        String signInText = loginPage.getSignInElementText();;
         Assert.assertEquals(signInText, "Sign in");
     }
 }

@@ -16,6 +16,15 @@ public class LoginPage {
         this.driver = driver;
     }
 
+    public void login(String user, String password) {
+        populateUsername(user);
+        populatePassword(password);
+        clickSignIn();
+    }
+    public void navigateTo() {
+        this.driver.get(LoginPage.PAGE_URL);
+    }
+
     public void clickSignIn() {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         WebElement signInButton = wait.until(ExpectedConditions.elementToBeClickable(By.id("sign-in-button")));
@@ -27,9 +36,9 @@ public class LoginPage {
         passwordField.sendKeys(password);
     }
 
-    public void populateUsername(String username) {
+    public void populateUsername(String user) {
         WebElement userNameField = driver.findElement(By.id("defaultLoginFormUsername"));
-        userNameField.sendKeys(username);
+        userNameField.sendKeys(user);
     }
 
     public String getSignInElementText() {
