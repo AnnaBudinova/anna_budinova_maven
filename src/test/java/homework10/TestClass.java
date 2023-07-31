@@ -1,9 +1,8 @@
-package homework;
+package homework10;
 
 import org.testng.Assert;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
-import java.util.Objects;
 
 public class TestClass {
     @DataProvider(name = "generateNumbersSum")
