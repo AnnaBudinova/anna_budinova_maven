@@ -52,7 +52,4 @@ public class LoginPage {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         return wait.until(ExpectedConditions.urlToBe(LoginPage.PAGE_URL));
     }
-    public void navigateTo() {
-        this.driver.get(LoginPage.PAGE_URL);
-    }
 }
