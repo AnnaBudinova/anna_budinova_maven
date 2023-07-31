@@ -15,7 +15,11 @@ public class LoginPage {
     public LoginPage(WebDriver driver) {
         this.driver = driver;
     }
-
+    public void login(String username, String password){
+        populateUsername(username);
+        populatePassword(password);
+        clickSignIn();
+    }
     public void clickSignIn() {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         WebElement signInButton = wait.until(ExpectedConditions.elementToBeClickable(By.id("sign-in-button")));
@@ -42,5 +46,8 @@ public class LoginPage {
     public boolean isUrlLoaded() {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         return wait.until(ExpectedConditions.urlToBe(LoginPage.PAGE_URL));
+    }
+    public void navigateTo() {
+        this.driver.get(LoginPage.PAGE_URL);
     }
 }

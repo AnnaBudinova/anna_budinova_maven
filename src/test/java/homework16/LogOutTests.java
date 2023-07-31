@@ -10,6 +10,8 @@ import org.testng.annotations.*;
 
 import java.time.Duration;
 
+import static java.sql.DriverManager.getDriver;
+
 public class LogOutTests {
     private WebDriver driver;
 
