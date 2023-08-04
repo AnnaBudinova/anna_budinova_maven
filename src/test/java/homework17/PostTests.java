@@ -9,6 +9,7 @@ import org.testng.annotations.Test;
 import java.io.File;
 
 public class PostTests extends TestObject {
+    private WebDriver driver;
     @DataProvider(name = "getUsers")
     public Object[][] getUsers() {
         File postPicture = new File("src\\test\\resources\\upload\\testUpload.jpg");
@@ -40,7 +41,7 @@ public class PostTests extends TestObject {
 
         ProfilePage profilePage = new ProfilePage(driver);
         Assert.assertTrue(profilePage.isUrlLoaded(), "The Profile URL is not correct!");
-        Assert.assertEquals(profilePage.getPostCount(), 1, "The number of Posts is incorrect!");
+        Assert.assertEquals(profilePage.getPostCount(), 3, "The number of Posts is incorrect!");
         profilePage.clickPost(0);
 
         PostModal postModal = new PostModal(driver);
@@ -48,5 +49,4 @@ public class PostTests extends TestObject {
         Assert.assertEquals(postModal.getPostTitle(), caption);
         Assert.assertEquals(postModal.getPostUser(), username);
     }
-
 }
