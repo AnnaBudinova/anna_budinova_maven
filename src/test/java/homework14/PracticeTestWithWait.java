@@ -46,7 +46,7 @@ public class PracticeTestWithWait {
         WebElement profileLink = wait.until(ExpectedConditions.elementToBeClickable(By.id("nav-link-profile")));
         profileLink.click();
 
-        wait = new WebDriverWait(driver, Duration.ofSeconds(25));
+        wait = new WebDriverWait(driver, Duration.ofSeconds(30));
         wait.until(ExpectedConditions.urlToBe("http://training.skillo-bg.com:4300/users/4697"));
 
         WebElement userNameElement = driver.findElement(By.tagName("h2"));
