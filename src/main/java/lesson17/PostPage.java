@@ -10,10 +10,10 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import java.io.File;
 import java.time.Duration;
 
-public class NewPostPage {
+public class PostPage {
     public static final String PAGE_URL = "http://training.skillo-bg.com:4300/posts/create";
     private final WebDriver driver;
-    public NewPostPage(WebDriver driver) {
+    public PostPage(WebDriver driver) {
         this.driver = driver;
     }
 
@@ -51,6 +51,6 @@ public class NewPostPage {
 
     public boolean isUrlLoaded() {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-        return wait.until(ExpectedConditions.urlToBe(NewPostPage.PAGE_URL));
+        return wait.until(ExpectedConditions.urlToBe(PostPage.PAGE_URL));
     }
 }

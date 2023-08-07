@@ -30,13 +30,13 @@ public class PostTests extends TestObject {
         Header header = new Header(driver);
         header.clickNewPost();
 
-        NewPostPage newPostPage = new NewPostPage(driver);
-        Assert.assertTrue(newPostPage.isUrlLoaded(), "The POST URL is not correct!");
-        newPostPage.uploadPicture(file);
-        Assert.assertTrue(newPostPage.isImageVisible(), "The image is not visible!");
-        Assert.assertEquals(file.getName(), newPostPage.getImageName(), "The image name is incorrect!");
-        newPostPage.populatePostCaption(caption);
-        newPostPage.clickCreatePost();
+        PostPage postPage = new PostPage(driver);
+        Assert.assertTrue(postPage.isUrlLoaded(), "The POST URL is not correct!");
+        postPage.uploadPicture(file);
+        Assert.assertTrue(postPage.isImageVisible(), "The image is not visible!");
+        Assert.assertEquals(file.getName(), postPage.getImageName(), "The image name is incorrect!");
+        postPage.populatePostCaption(caption);
+        postPage.clickCreatePost();
 
         ProfilePage profilePage = new ProfilePage(driver);
         Assert.assertTrue(profilePage.isUrlLoaded(), "The Profile URL is not correct!");
