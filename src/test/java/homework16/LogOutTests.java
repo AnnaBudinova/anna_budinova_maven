@@ -1,14 +1,10 @@
 package homework16;
 
-import io.github.bonigarcia.wdm.WebDriverManager;
 import lesson16.factory.*;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.edge.EdgeDriver;
 import org.testng.Assert;
 import org.testng.annotations.*;
-
-import java.time.Duration;
 
 public class LogOutTests extends TestObject {
 
@@ -60,9 +56,9 @@ public class LogOutTests extends TestObject {
         Header header = new Header(driver);
         header.newPostLink();
 
-        NewPostPage newPostPage = new NewPostPage(driver);
-        Assert.assertTrue(newPostPage.isUrlLoaded(), "The Profile URL is not correct!");
-        String isTextDisplayed = newPostPage.isTextDisplayed();
+        PostPage postPage = new PostPage(driver);
+        Assert.assertTrue(postPage.isUrlLoaded(), "The Profile URL is not correct!");
+        String isTextDisplayed = postPage.isTextDisplayed();
         Assert.assertEquals(isTextDisplayed, "Post a picture to share with your awesome followers");
         header.clickLogOut();
         Assert.assertTrue(loginPage.isUrlLoaded(), "The Login URL is not correct!");
