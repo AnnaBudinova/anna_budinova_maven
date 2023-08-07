@@ -15,12 +15,10 @@ public class DownloadTests extends TestObject {
         driver.get("https://demoqa.com/upload-download");
         WebElement downloadButton = driver.findElement(By.id("downloadButton"));
         downloadButton.click();
-
-        String fileName = "sampleFile.jpg";
+        String fileName = "sampleFile.jpeg";
         File file = new File(DOWNLOAD_DIR.concat(fileName));
         Assert.assertTrue(isFileDownloaded(file), "The file is not downloaded!");
     }
-
     private boolean isFileDownloaded(File file) throws InterruptedException {
         int waitTime = 20;
         int counter = 0;
@@ -32,7 +30,6 @@ public class DownloadTests extends TestObject {
             Thread.sleep(1000);
             counter++;
         }
-
         return false;
     }
 }

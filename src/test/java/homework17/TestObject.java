@@ -68,7 +68,6 @@ public class TestObject {
             System.out.printf("Unable to delete the files in Directory:%s%n", directoryPath);
         }
     }
-
     private void takeScreenshot(ITestResult testResult) {
         if (ITestResult.FAILURE == testResult.getStatus()) {
             try {
