@@ -40,7 +40,7 @@ public class PostTests extends TestObject {
 
         ProfilePage profilePage = new ProfilePage(driver);
         Assert.assertTrue(profilePage.isUrlLoaded(), "The Profile URL is not correct!");
-        Assert.assertEquals(profilePage.getPostCount(), 1, "The number of Posts is incorrect!");
+        Assert.assertEquals(profilePage.getPostCount(), 3, "The number of Posts is incorrect!");
         profilePage.clickPost(0);
 
         PostModal postModal = new PostModal(driver);
@@ -48,5 +48,4 @@ public class PostTests extends TestObject {
         Assert.assertEquals(postModal.getPostTitle(), caption);
         Assert.assertEquals(postModal.getPostUser(), username);
     }
-
 }
